@@ -14,6 +14,7 @@ $navbar-height: 50px;
     content: " ";
   }
 }
+
 nav.navbar {
   background-color: #eee;
   height: $navbar-height;
@@ -92,23 +93,30 @@ ul.nav {
 $cols: 12;
 
 @for $i from 1 through $cols {
-  .col-lg-#{$i} {
-    float:left;
-    width: percentage($i/$cols);
-    padding: 0 1%;
-    box-sizing: border-box;
-  }
-  
+	@for $j from 1 through $cols {
+		@for $k from 1 through $cols {
+			.col-lg-#{$i} {
+				&.col-md-#{$j} {
+					&.col-sm-#{$k} {
+						float:left;
+						padding: 0 1%;
+						box-sizing: border-box;
+
+						@media screen and (min-width: 1000px) {
+							width: percentage($i/$cols);
+						}
+
+						@media screen and (min-width: 700px) and (max-width: 1000px) {
+							width: percentage($j/$cols);
+						}
+
+						@media screen and (min-width: 100px) and (max-width: 700 px) {
+							width: percentage($k/$cols);
+						}
+
+					}
+				}
+			}
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
